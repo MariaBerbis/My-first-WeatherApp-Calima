@@ -16,6 +16,7 @@ function refreshWeather(response) {
   windSpeedElement.innerHTML = `${response.data.wind.speed}km/h`;
   temperatureElement.innerHTML = Math.round(temperature);
   iconElement.innerHTML = `<img src="${response.data.condition.icon_url}" class="weather-app-icon"/>`;
+  getForecast(response.data.city);
 }
 
 function formatDate(date) {
@@ -52,9 +53,13 @@ function handleSearchSubmit(event) {
   searchCity(searchInput.value);
 }
 
-function displayForecast() {
-  let forecastElement = document.querySelector("#forecast"); // Correct variable name
+function getForecast(city) {
+  let apiKey = "5399eea49f9baa9t4a0de908084b4of2";
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
+  axios(apiUrl).then(displayForecast);
+}
 
+function displayForecast(response) {
   let days = ["Tue", "Wed", "Thu", "Fri", "Sat"];
   let forecastHtml = "";
 
@@ -62,24 +67,25 @@ function displayForecast() {
     forecastHtml =
       forecastHtml +
       `
-  <div class="row">
+    <div class="row">
     <div class="col-2">
-      <div class="weather-forecast-date">${day}<br /></div>
-      <img
-        src="http://openweathermap.org/img/wn/50d@2x.png"
-        alt=""
-        width="42"
-      />
-      <br />
-      <div class="weather-forecast-temperatures">
-        <span class="weather-forecast-temperature-max">18°</span>
-        <span class="weather-forecast-temperature-min"> 12°</span>
-      </div>
+    <div class="weather-forecast-date">${day}<br /></div>
+    <img
+    src="http://openweathermap.org/img/wn/50d@2x.png"
+    alt=""
+    width="42"
+    />
+    <br />
+    <div class="weather-forecast-temperatures">
+    <span class="weather-forecast-temperature-max">18°</span>
+    <span class="weather-forecast-temperature-min"> 12°</span>
     </div>
-  </div>
-`;
+    </div>
+    </div>
+    `;
   });
 
+  let forecastElement = document.querySelector("#forecast");
   forecastElement.innerHTML = forecastHtml;
 }
 
@@ -87,4 +93,3 @@ let searchFormElement = document.querySelector("#search-form");
 searchFormElement.addEventListener("submit", handleSearchSubmit);
 
 searchCity("Maspalomas");
-displayForecast();
