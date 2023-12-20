@@ -63,6 +63,7 @@ main {
 }
 
 .weather-app-city {
+  color: #232323;
   margin: 0;
   font-size: 38px;
   line-height: 48px;
@@ -91,6 +92,7 @@ main {
 }
 
 .weather-app-temperature {
+  color: #232323;
   font-size: 100px;
   font-weight: bold;
   line-height: 88px;
@@ -99,6 +101,7 @@ main {
 }
 
 .weather-app-unit {
+  color: #232323;
   display: inline-block;
   font-size: 28px;
   position: relative;
@@ -121,6 +124,11 @@ main {
 .weather-forecast-date {
   font-size: 16px;
   opacity: 0.5;
+}
+
+.weather-forecast-icon {
+  width: 80px;
+  text-align: center;
 }
 
 .weather-forecast-temperatures {
